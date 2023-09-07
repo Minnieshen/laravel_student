@@ -35,20 +35,17 @@
                         <td>{{ $item['name'] }}</td>
                         <td>{{ $item['mobile'] }}</td>
                         <td>
-                            <form action="{{ route('students.destroy', ['student' => $item['id']]) }}" method="POST">
-                                <a class="btn btn-warning"
-                                    href="{{ route('students.edit', ['student' => $item['id']]) }}"
-                                    role="button">修改</a>
-                                @csrf
-                                @method('delete')
-                                <input class="btn btn-danger" type="submit" value="刪除">
-                            </form>
+                            <a class="btn btn-warning" href="{{ route('students.edit', ['student' => $item['id']]) }}"
+                                role="button">修改</a>
                         </td>
                     </tr>
                 @endforeach
+
+
             </tbody>
         </table>
     </div>
+
 </body>
 
 </html>

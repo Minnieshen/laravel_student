@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Teather1Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,4 +22,11 @@ use App\Http\Controllers\StudentController;
 //     return view('student.index');
 // })->name('students.index');
 
+// 學生資料  上面有use
+// 自訂single action 放下面
 Route::resource('students', StudentController::class);
+Route::get('/students_test', [StudentController::class, 'test'])->name('students.test');
+
+
+// 老師資料
+Route::resource('teather1s', Teather1Controller::class);

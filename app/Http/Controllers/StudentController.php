@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -11,8 +12,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
-        return view('student.index');
+        $data=Student::all();
+        return view('student.index')->with('data', $data);
+        
     }
 
     /**
@@ -21,7 +23,7 @@ class StudentController extends Controller
     public function create()
     {
         //
-        
+        return view('student.create');
     }
 
     /**
@@ -29,7 +31,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                // $data = $request->all();
+                $data = $request->except('_token');
+                // dd($data);
+                // dd($request);
+                $item = new Student;
+                // dd($item);
+        
+                $item->name = $data['name'];
+                $item->mobile = $data['mobile'];
+                // dd($item);
+        
+        
+                $item->save();
+                        // return redirect('/flights');
+        return redirect()->route('students.index');
     }
 
     /**
@@ -45,15 +61,20 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //students/55688/edit
+        dd($id);
+        $data = "SELECT * FROM table WHERE `id` = '$id'";
+        return view('student.edit')->with('data', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    { 
+     $data = student::find(1);
+     $data->name = 'Paris to London';
+     $data->save();
     }
 
     /**
@@ -61,6 +82,12 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = student::find($id);
+        $data->delete(); 
+
+                // dd("$id del ok");
+                $data = Student::find($id);
+                $data->delete();
+                return redirect()->route('students.index');
     }
 }
